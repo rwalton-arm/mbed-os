@@ -1098,9 +1098,7 @@ class mbedToolchain(with_metaclass(ABCMeta, object)):
         This is done to be case insensitive when validating.
         """
         if  hasattr(target, "default_lib"):
-            raise NotSupportedException(
-                   "target.default_lib is no longer supported, please use target.c_lib for C library selection."
-                )
+            target.c_lib = target.default_lib.lower()
         if  hasattr(target, "c_lib"):
             target.c_lib = target.c_lib.lower()
             if (
