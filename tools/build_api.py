@@ -250,13 +250,11 @@ def find_valid_toolchain(target, toolchain):
                 "Could not find executable for {}.\n"
                 "Currently set search path: {}"
             ).format(toolchain_name, search_path)
-        else:            
+        else:
             if toolchain_name == "ARMC5":
-                raise NotSupportedException(
-                    "Arm Compiler 5 is no longer supported, please upgrade to Arm Compiler 6."
-                )                
+                end_warnings.append("Arm Compiler 5 is no longer supported")
             if (
-                toolchain_name in ["uARM", "ARMC6"] 
+                toolchain_name in ["uARM", "ARMC5", "ARMC6"]
                 and "uARM" in {toolchain_name, target.default_toolchain}
             ):
                 end_warnings.append(UARM_TOOLCHAIN_WARNING)
