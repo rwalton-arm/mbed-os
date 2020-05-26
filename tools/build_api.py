@@ -55,7 +55,6 @@ from .libraries import Library
 from .toolchains.arm import UARM_TOOLCHAIN_WARNING
 from .toolchains.mbed_toolchain import should_replace_small_c_lib
 from .toolchains import TOOLCHAIN_CLASSES, TOOLCHAIN_PATHS, mbedToolchain
-from .toolchains.arm import ARMC5_MIGRATION_WARNING
 from .config import Config
 from .build_profiles import find_build_profile, get_toolchain_profile, find_targets_json
 
