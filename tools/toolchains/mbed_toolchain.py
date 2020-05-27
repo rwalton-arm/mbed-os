@@ -1097,8 +1097,8 @@ class mbedToolchain(with_metaclass(ABCMeta, object)):
         target.c_lib is modified to have the lowercased string of its original string.
         This is done to be case insensitive when validating.
         """
-        if  hasattr(target, "default_lib") and not hasattr(target, "c_lib"):
-            target.c_lib = target.default_lib.lower()
+#        if  hasattr(target, "default_lib") and not hasattr(target, "c_lib"):
+#            target.c_lib = target.default_lib.lower()
         if  hasattr(target, "c_lib"):
             target.c_lib = target.c_lib.lower()
             if (
