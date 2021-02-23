@@ -5,8 +5,7 @@ set(CMAKE_ASM_COMPILER "armclang")
 set(CMAKE_C_COMPILER "armclang")
 set(CMAKE_CXX_COMPILER "armclang")
 set(CMAKE_AR "armar")
-set(ARM_ELF2BIN "fromelf")
-set_property(GLOBAL PROPERTY ELF2BIN ${ARM_ELF2BIN})
+set(CMAKE_OBJCOPY "fromelf")
 
 # tell cmake about compiler targets.
 # This will cause it to add the --target flag.

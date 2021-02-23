@@ -4,8 +4,7 @@
 set(CMAKE_ASM_COMPILER "arm-none-eabi-gcc")
 set(CMAKE_C_COMPILER "arm-none-eabi-gcc")
 set(CMAKE_CXX_COMPILER "arm-none-eabi-g++")
-set(GCC_ELF2BIN "arm-none-eabi-objcopy")
-set_property(GLOBAL PROPERTY ELF2BIN ${GCC_ELF2BIN})
+set(GCC_OBJCOPY "arm-none-eabi-objcopy")
 
 # build toolchain flags that get passed to everything (including CMake compiler checks)
 list(APPEND link_options
