@@ -51,12 +51,31 @@ if(NOT ${MBED_PRINTF_LIB} IN_LIST MBED_PRINTF_LIB_TYPES)
     )
 endif()
 
+add_library(mbed-minimal-printf INTERFACE)
+target_compile_definitions(mbed-minimal-printf
+    INTERFACE
+        MBED_MINIMAL_PRINTF
+)
+set(printf_link_options "")
+list(APPEND printf_link_options
+    "-Wl,--wrap,printf"
+    "-Wl,--wrap,sprintf"
+    "-Wl,--wrap,snprintf"
+    "-Wl,--wrap,vprintf"
+    "-Wl,--wrap,vsprintf"
+    "-Wl,--wrap,vsnprintf"
+    "-Wl,--wrap,fprintf"
+    "-Wl,--wrap,vfprintf"
+)
+target_link_options(mbed-minimal-printf
+    INTERFACE
+    "$<$<CXX_COMPILER_ID:GNU>:${printf_link_options}>"
+)
+
 mbed_set_cpu_core_definitions(mbed-core)
 if(${MBED_TOOLCHAIN_FILE_USED})
     mbed_set_profile_options(mbed-core ${MBED_TOOLCHAIN})
     mbed_set_c_lib(mbed-core ${MBED_C_LIB})
-    mbed_set_printf_lib(mbed-core ${MBED_PRINTF_LIB})
-
     target_compile_features(mbed-core
         INTERFACE
             c_std_11
@@ -136,7 +155,11 @@ string(TOLOWER ${MBED_TARGET} MBED_TARGET_CONVERTED)
 string(REPLACE "_" "-" MBED_TARGET_CONVERTED ${MBED_TARGET_CONVERTED})
 string(PREPEND MBED_TARGET_CONVERTED "mbed-")
 
-target_link_libraries(mbed-core INTERFACE ${MBED_TARGET_CONVERTED})
+target_link_libraries(mbed-core
+    INTERFACE
+        ${MBED_TARGET_CONVERTED}
+        "$<$<STREQUAL:${MBED_PRINTF_LIB},minimal-printf>:mbed-minimal-printf>"
+)
 
 #
 # Configures the application
