@@ -114,6 +114,7 @@ target_compile_definitions(mbed-core
 #
 # TODO: Remove this and find a more idiomatic way of passing compile definitions to CPP without
 # using response files or global properties.
+include(tools/cmake/mbed_generate_compile_defs_file.cmake)
 mbed_generate_options_for_linker(mbed-core RESPONSE_FILE_PATH)
 set_property(GLOBAL PROPERTY COMPILE_DEFS_RESPONSE_FILE ${RESPONSE_FILE_PATH})
 
