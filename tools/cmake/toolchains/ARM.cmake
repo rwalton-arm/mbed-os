@@ -40,19 +40,3 @@ if(MBED_CPU_CORE MATCHES "-NS$")
         "--predefine=\"-DDOMAIN_NS=0x1\""
     )
 endif()
-
-# Configure the toolchain to select the selected C library
-function(mbed_set_c_lib target lib_type)
-    if (${lib_type} STREQUAL "small")
-        target_compile_definitions(${target}
-            INTERFACE
-                MBED_RTOS_SINGLE_THREAD
-                __MICROLIB
-        )
-
-        target_link_options(${target}
-            INTERFACE
-                "--library_type=microlib"
-        )
-    endif()
-endfunction()

@@ -40,20 +40,3 @@ list(APPEND common_options
     "-fomit-frame-pointer"
     "-g3"
 )
-
-
-# Configure the toolchain to select the selected C library
-function(mbed_set_c_lib target lib_type)
-    if (${lib_type} STREQUAL "small")
-        target_compile_definitions(${target}
-            INTERFACE
-                MBED_RTOS_SINGLE_THREAD
-                __NEWLIB_NANO
-        )
-
-        target_link_options(${target}
-            INTERFACE
-                "--specs=nano.specs"
-        )
-    endif()
-endfunction()
