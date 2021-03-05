@@ -1,10 +1,6 @@
 # Copyright (c) 2020 ARM Limited. All rights reserved.
 # SPDX-License-Identifier: Apache-2.0
 
-if("CORTEX_M" IN_LIST MBED_TARGET_LABELS)
-    add_subdirectory(TARGET_CORTEX_M)
-endif()
-
 add_subdirectory(minimal-printf)
 
 target_include_directories(mbed-core
@@ -48,3 +44,12 @@ target_sources(mbed-core
         mbed_thread.cpp
         mbed_wait_api_no_rtos.c
 )
+
+add_subdirectory(TARGET_CORTEX_M EXCLUDE_FROM_ALL)
+
+if ($<IN_LIST,TARGET_CORTEX_M,INTERFACE_COMPILE_DEFINITIONS>)
+target_link_libraries(mbed-core
+    INTERFACE
+        mbed-cortex-m-fault-handler
+)
+endif()
