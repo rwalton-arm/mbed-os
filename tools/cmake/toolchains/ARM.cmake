@@ -54,16 +54,6 @@ function(mbed_set_c_lib target lib_type)
     endif()
 endfunction()
 
-# Configure the toolchain to select the selected printf library
-function(mbed_set_printf_lib target lib_type)
-    if (${lib_type} STREQUAL "minimal-printf")
-        target_compile_definitions(${target}
-            INTERFACE
-                MBED_MINIMAL_PRINTF
-        )
-    endif()
-endfunction()
-
 # Add linker flags to generate a mapfile with a given name
 # `mapfile` is overridden as CMake provides the name of the diagnostic output
 # file by providing armlink with the --list command line option.

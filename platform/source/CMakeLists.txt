@@ -5,7 +5,7 @@ if("CORTEX_M" IN_LIST MBED_TARGET_LABELS)
     add_subdirectory(TARGET_CORTEX_M)
 endif()
 
-add_subdirectory(minimal-printf)
+add_subdirectory(minimal-printf EXCLUDE_FROM_ALL)
 
 target_include_directories(mbed-core
     INTERFACE

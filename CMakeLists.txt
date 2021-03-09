@@ -57,7 +57,10 @@ mbed_set_cpu_core_definitions(mbed-core)
 if(${MBED_TOOLCHAIN_FILE_USED})
     mbed_set_profile_options(mbed-core ${MBED_TOOLCHAIN})
     mbed_set_c_lib(mbed-core ${MBED_C_LIB})
-    mbed_set_printf_lib(mbed-core ${MBED_PRINTF_LIB})
+
+    if(${MBED_PRINTF_LIB} STREQUAL minimal-printf)
+        target_link_libraries(mbed-core INTERFACE mbed-minimal-printf)
+    endif()
 
     target_compile_features(mbed-core
         INTERFACE
