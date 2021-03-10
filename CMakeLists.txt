@@ -56,10 +56,13 @@ endif()
 mbed_set_cpu_core_definitions(mbed-core)
 if(${MBED_TOOLCHAIN_FILE_USED})
     mbed_set_profile_options(mbed-core ${MBED_TOOLCHAIN})
-    mbed_set_c_lib(mbed-core ${MBED_C_LIB})
 
     if(${MBED_PRINTF_LIB} STREQUAL minimal-printf)
         target_link_libraries(mbed-core INTERFACE mbed-minimal-printf)
+    endif()
+
+    if(${MBED_C_LIB} STREQUAL small)
+        target_link_libraries(mbed-core INTERFACE mbed-small-c-lib)
     endif()
 
     target_compile_features(mbed-core
@@ -67,7 +70,6 @@ if(${MBED_TOOLCHAIN_FILE_USED})
             c_std_11
             cxx_std_14
     )
-
 endif()
 
 target_compile_definitions(mbed-core

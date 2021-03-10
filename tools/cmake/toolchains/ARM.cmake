@@ -38,22 +38,6 @@ if(MBED_CPU_CORE MATCHES "-NS$")
     )
 endif()
 
-# Configure the toolchain to select the selected C library
-function(mbed_set_c_lib target lib_type)
-    if (${lib_type} STREQUAL "small")
-        target_compile_definitions(${target}
-            INTERFACE
-                MBED_RTOS_SINGLE_THREAD
-                __MICROLIB
-        )
-
-        target_link_options(${target}
-            INTERFACE
-                "--library_type=microlib"
-        )
-    endif()
-endfunction()
-
 # Add linker flags to generate a mapfile with a given name
 # `mapfile` is overridden as CMake provides the name of the diagnostic output
 # file by providing armlink with the --list command line option.
